@@ -145,9 +145,11 @@ Control.ca-bundle
 Control.system-ca-bundle 
 
 # Visual Studio Code # 
-.vscode/* 
+.vscode
 !.vscode/settings.json 
 !.vscode/tasks.json 
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+.vscode/settings.json
+.vscode/launch.json
