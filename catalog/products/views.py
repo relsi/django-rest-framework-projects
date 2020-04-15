@@ -1,7 +1,6 @@
 from django.http import JsonResponse
 from .models import Product, Manufacturer
 
-
 #############################
 # function based views
 #############################
@@ -34,6 +33,32 @@ def product_detail(request, pk):
         
     return response
 
+def manufacturer_list(request):
+    manufacturers = Manufacturer.objects.filter(active=True)
+    data = {"products": list(manufacturers.values())}
+    response = JsonResponse(data)
+    return response
+
+def manufacturer_detail(request, pk):
+    try:
+        manufacturer = Manufacturer.objects.get(pk=pk)
+        manufacturer_products = manufacturer.products.all()
+        data = {"manufacturer":{
+                    "name": manufacturer.name,
+                    "location": manufacturer.location,
+                    "active": manufacturer.active,
+                    "products": list(manufacturer_products.values())
+                }}
+        response = JsonResponse(data)
+    except Manufacturer.DoesNotExist:
+        response = JsonResponse({
+            "error": {
+                "code": 404,
+                "message": "Manufacturer not found"
+            }
+        }, status=404)
+        
+    return response
 #############################
 # Class based views
 #############################
