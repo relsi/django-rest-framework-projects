@@ -154,4 +154,5 @@ Control.system-ca-bundle
 .vscode/settings.json
 .vscode/launch.json
 uploads
-newsapi/news/migrations/0002_auto_20200415_2120.py
+newsapi/news/migrations/
+ebooksapi/ebooks/migrations/
