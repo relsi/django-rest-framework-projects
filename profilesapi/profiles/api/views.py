@@ -1,12 +1,22 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-# from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import viewsets
 from rest_framework import mixins
 from profiles.models import Profile, ProfileStatus
-from profiles.api.serializers import ProfileSerializer, ProfileStatusSerializer
 from profiles.api.permissions import IsOwnerProfileOrReadOnly, IsOwnerOrReadOnly
+from profiles.api.serializers import (ProfileSerializer, 
+                                      ProfileStatusSerializer, 
+                                      ProfileAvatarSerializer)
+
+#class to update avatar
+class AvatarUpdateView(generics.UpdateAPIView):
+    serializer_class = ProfileAvatarSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        profile_object = self.request.user.profile
+        return profile_object
 
 #example using viewsets generic views, dont ModelViewset
 #this way we get the endpoints explicitly
