@@ -5,6 +5,7 @@ from rest_framework import viewsets
 from rest_framework import mixins
 from profiles.models import Profile
 from profiles.api.serializers import ProfileSerializer
+from profiles.api.permissions import IsOwnerProfileOrReadOnly
 
 class ProfileViewSet(mixins.UpdateModelMixin,
                      mixins.ListModelMixin,
@@ -12,4 +13,4 @@ class ProfileViewSet(mixins.UpdateModelMixin,
                      viewsets.GenericViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwnerProfileOrReadOnly]
