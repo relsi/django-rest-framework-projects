@@ -21,6 +21,7 @@ urlpatterns = [
     path('api/', include('profiles.api.urls')),
     path('api-auth/', include("rest_framework.urls")), #to access via webbrowser
     path('api/rest-auth/', include("rest_auth.urls")), #to access via rest
+    path('api/rest-auth/registration/', include("rest_auth.registration.urls")), #to access via rest
 ]
 
 from django.conf.urls.static import static
